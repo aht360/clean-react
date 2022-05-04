@@ -1,37 +1,22 @@
 {
-    "compilerOptions": {
-      "allowJs": false,
-      "allowSyntheticDefaultImports": true,
-      "alwaysStrict": true,
-      "esModuleInterop": true,
-      "forceConsistentCasingInFileNames": true,
-      "jsx": "react",
-      "lib": [
-        "dom",
-        "dom.iterable",
-        "esnext"
-      ],
-      "module": "esnext",
-      "moduleResolution": "node",
-      "noEmit": true,
-      "noImplicitAny": true,
-      "noImplicitThis": true,
-      "rootDir": "src",
-      "baseUrl": "src",
-      "paths": {
-        "@/*": ["*"]
-      },
-      "plugins": [{
-        "name": "typescript-styled-plugin",
-        "validate": false
-      }],
-      "resolveJsonModule": true,
-      "skipLibCheck": true,
-      // "strict": true,
-      // "strictPropertyInitialization": true,
-      "target": "ES2018"
+  "compilerOptions": {
+    "target": "es6",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "jsx": "react",
+    "rootDir": "src",
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"]
     },
-    "include": [
-      "src"
-    ]
+    "allowJs": true,
+    "resolveJsonModule": true
+  },
+  "include": ["src"]
 }
