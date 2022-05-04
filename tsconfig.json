@@ -16,6 +16,11 @@
       "noEmit": true,
       "noImplicitAny": true,
       "noImplicitThis": true,
+      "rootDir": "src",
+      "baseUrl": "src",
+      "paths": {
+        "@/*": ["*"]
+      },
       "plugins": [{
         "name": "typescript-styled-plugin",
         "validate": false
