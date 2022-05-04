@@ -27,7 +27,7 @@
       }],
       "resolveJsonModule": true,
       "skipLibCheck": true,
-      "strict": true,
+      // "strict": true,
       "strictPropertyInitialization": true,
       "target": "ES2018"
     },
