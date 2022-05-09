@@ -39,11 +39,14 @@ module.exports = {
     }]
   },
   devServer: {
-    contentBase: './public',
-    writeToDisk: true,
+    devMiddleware: {
+      writeToDisk: true
+    },
+    static: {
+      directory: './public'
+    },
     historyApiFallback: true,
-    port: 3000,
-    hot: true
+    port: 8080
   },
   externals: {
     react: 'React',
