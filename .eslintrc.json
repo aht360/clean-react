@@ -23,6 +23,7 @@
     "import/export": "off",
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
-    "@typescript-eslint/camelcase": "off"
+    "@typescript-eslint/camelcase": "off",
+    "react/prop-types": "off"
   }
 }
