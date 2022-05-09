@@ -1,15 +1,13 @@
-import Logo from '@/presentation/components/Logo/logo'
-import Spinner from '@/presentation/components/Spinner/spinner'
-import React from 'react'
-import Styles from './login-styles.scss'
+import Footer from "@/presentation/components/Footer/Footer";
+import LoginHeader from "@/presentation/components/LoginHeader/LoginHeader";
+import Spinner from "@/presentation/components/Spinner/spinner";
+import React from "react";
+import Styles from "./login-styles.scss";
 
 const Login: React.FC = () => {
   return (
     <div className={Styles.login}>
-      <header className={Styles.header}>
-        <Logo />
-        <h1>4Dev - Enquetes para Programadores</h1>
-      </header>
+      <LoginHeader />
       <form className={Styles.form}>
         <h2>Login</h2>
         <div className={Styles.inputWrap}>
@@ -36,9 +34,9 @@ const Login: React.FC = () => {
           <span className={Styles.error}>Erro</span>
         </div>
       </form>
-      <footer className={Styles.footer} />
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
