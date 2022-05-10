@@ -4,3 +4,4 @@ export { default as Input } from './Input/Input';
 export { default as LoginHeader } from './LoginHeader/LoginHeader';
 export { default as Logo } from './Logo/Logo';
 export { default as Spinner } from './Spinner/Spinner';
+export { default as Router } from './Router/Router';

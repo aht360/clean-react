@@ -46,8 +46,10 @@
     "webpack-dev-server": "^4.9.0"
   },
   "dependencies": {
+    "@types/react-router-dom": "^5.3.3",
     "axios": "^0.27.2",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.1.0",
+    "react-router-dom": "^6.3.0"
   }
 }
