@@ -91,4 +91,19 @@ describe("Login page", () => {
     expect(passwordStatus.title).toBe("Ok");
     expect(passwordStatus.textContent).toBe("🟢");
   });
+
+  it("Should show valid email state if validation succeeds", () => {
+    const { sut, validationStub } = makeSut();
+    validationStub.errorMessage = null;
+
+    const emailInput = sut.getByTestId("email");
+    fireEvent.input(emailInput, {
+      target: { value: faker.internet.email() },
+    });
+
+    const emailStatus = sut.getByTestId("email-status");
+
+    expect(emailStatus.title).toBe("Ok");
+    expect(emailStatus.textContent).toBe("🟢");
+  });
 });
