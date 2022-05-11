@@ -2,21 +2,21 @@ import {
   Footer,
   FormStatus,
   Input,
-  LoginHeader
+  LoginHeader,
 } from "@/presentation/components";
 import { FormContext } from "@/presentation/contexts";
 import React, { useState } from "react";
 import styles from "./login-styles.scss";
 
 type StateProps = {
-  isLoading: boolean
-  errorMessage: string
+  isLoading: boolean;
+  errorMessage: string;
 };
 
 const Login: React.FC = () => {
   const [state] = useState<StateProps>({
     isLoading: false,
-    errorMessage: ""
+    errorMessage: "",
   });
 
   return (
@@ -33,7 +33,12 @@ const Login: React.FC = () => {
             placeholder="Digite sua senha"
           />
 
-          <button type="submit" className={styles.submit}>
+          <button
+            data-testid="submit"
+            type="submit"
+            className={styles.submit}
+            disabled
+          >
             Entrar
           </button>
 
