@@ -27,6 +27,9 @@
     "react/prop-types": "off",
     "quotes": "off",
     "@typescript-eslint/quotes": "off",
-    "semi": "off"
+    "semi": "off",
+    "comma-dangle": "off",
+    "indent": "off",
+    "@typescript-eslint/indent": ["off"]
   }
 }
