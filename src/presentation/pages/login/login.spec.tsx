@@ -23,7 +23,9 @@ type SutParams = {
   validationError: string;
 };
 
-const history = createMemoryHistory();
+const history = createMemoryHistory({
+  initialEntries: ["/login"],
+});
 const location = {
   pathname: "/",
 };
@@ -226,6 +228,7 @@ describe("Login page", () => {
       "accessToken",
       authenticationSpy.account.accessToken
     );
+    expect(history.location.pathname).toBe("/");
   });
 
   it("Should go to signup page", () => {
