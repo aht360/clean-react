@@ -1,4 +1,5 @@
 import React from "react";
+import "jest-localstorage-mock";
 import {
   cleanup,
   fireEvent,
@@ -80,6 +81,9 @@ const simulateStatusForField = (
 
 describe("Login page", () => {
   afterEach(cleanup);
+  beforeEach(() => {
+    localStorage.clear();
+  });
 
   it("Should start with initial state", () => {
     const validationError = faker.random.word();
@@ -200,5 +204,18 @@ describe("Login page", () => {
 
     expect(mainError.textContent).toBe(error.message);
     expect(errorWrap.childElementCount).toBe(1);
+  });
+
+  it("Should add access token to localstorage on success", async () => {
+    const { sut, authenticationSpy } = makeSut();
+
+    simulateValidSubmit(sut);
+
+    await waitFor(async () => sut.findByTestId("submit"));
+
+    expect(localStorage.setItem).toHaveBeenCalledWith(
+      "accessToken",
+      authenticationSpy.account.accessToken
+    );
   });
 });
