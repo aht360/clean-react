@@ -7,12 +7,12 @@ import {
   RenderResult,
   waitFor,
 } from "@testing-library/react";
-import Login from "./Login";
 import { AuthenticationSpy, ValidationStub } from "@/presentation/test";
 import faker from "@faker-js/faker";
 import { InvalidCredentialsError } from "@/domain/errors";
 import { createMemoryHistory } from "history";
 import { Router } from "react-router-dom";
+import { Login } from "@/presentation/pages";
 
 type SutTypes = {
   sut: RenderResult;
