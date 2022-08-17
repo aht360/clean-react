@@ -7,7 +7,11 @@ import {
   RenderResult,
   waitFor,
 } from "@testing-library/react";
-import { AuthenticationSpy, ValidationStub } from "@/presentation/test";
+import {
+  AuthenticationSpy,
+  ValidationStub,
+  SaveAccessTokenMock,
+} from "@/presentation/test";
 import faker from "@faker-js/faker";
 import { InvalidCredentialsError } from "@/domain/errors";
 import { createMemoryHistory } from "history";
@@ -17,6 +21,7 @@ import { Login } from "@/presentation/pages";
 type SutTypes = {
   sut: RenderResult;
   authenticationSpy: AuthenticationSpy;
+  saveAccessTokenMock: SaveAccessTokenMock;
 };
 
 type SutParams = {
@@ -36,15 +41,22 @@ const makeSut = (params?: SutParams): SutTypes => {
 
   const authenticationSpy = new AuthenticationSpy();
 
+  const saveAccessTokenMock = new SaveAccessTokenMock();
+
   const sut = render(
     <Router navigator={history} location={location}>
-      <Login validation={validationStub} authentication={authenticationSpy} />
+      <Login
+        validation={validationStub}
+        authentication={authenticationSpy}
+        saveAccessToken={saveAccessTokenMock}
+      />
     </Router>
   );
 
   return {
     sut,
     authenticationSpy,
+    saveAccessTokenMock,
   };
 };
 
@@ -122,9 +134,6 @@ const testElementText = (
 
 describe("Login page", () => {
   afterEach(cleanup);
-  beforeEach(() => {
-    localStorage.clear();
-  });
 
   it("Should start with initial state", () => {
     const validationError = faker.random.word();
@@ -238,15 +247,12 @@ describe("Login page", () => {
     testErrorWrapChildCount(sut, 1);
   });
 
-  it("Should add access token to localstorage on success", async () => {
-    const { sut, authenticationSpy } = makeSut();
+  it("Should call SaveAccessToken on success", async () => {
+    const { sut, authenticationSpy, saveAccessTokenMock } = makeSut();
 
-    simulateValidSubmit(sut);
+    await simulateValidSubmit(sut);
 
-    await waitFor(async () => sut.findByTestId("submit"));
-
-    expect(localStorage.setItem).toHaveBeenCalledWith(
-      "accessToken",
+    expect(saveAccessTokenMock.accessToken).toBe(
       authenticationSpy.account.accessToken
     );
     expect(history.location.pathname).toBe("/");
