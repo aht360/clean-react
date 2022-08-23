@@ -28,17 +28,6 @@ const makeSut = (params?: SutParams): SutTypes => {
   };
 };
 
-const populateField = (
-  sut: RenderResult,
-  fieldName: string,
-  value = faker.random.word()
-): void => {
-  const input = sut.getByTestId(fieldName);
-  fireEvent.input(input, {
-    target: { value },
-  });
-};
-
 describe("Signup component", () => {
   afterEach(cleanup);
 
@@ -61,7 +50,7 @@ describe("Signup component", () => {
     const validationError = "uma palabra";
     const { sut } = makeSut({ validationError });
 
-    populateField(sut, "name");
+    Helper.populateField(sut, "name");
 
     Helper.testStatusForField(sut, "name", validationError);
   });
