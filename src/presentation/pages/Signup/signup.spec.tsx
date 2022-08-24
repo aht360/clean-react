@@ -46,11 +46,6 @@ const simulateValidSubmit = async (
   await waitFor(() => form);
 };
 
-const testElementExistance = (sut: RenderResult, fieldName: string): void => {
-  const el = sut.getByTestId(fieldName);
-  expect(el).toBeTruthy();
-};
-
 describe("Signup component", () => {
   afterEach(cleanup);
 
@@ -153,6 +148,6 @@ describe("Signup component", () => {
 
     await simulateValidSubmit(sut);
 
-    testElementExistance(sut, "spinner");
+    Helper.testElementExistance(sut, "spinner");
   });
 });
