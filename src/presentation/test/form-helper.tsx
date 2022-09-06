@@ -1,5 +1,5 @@
 import faker from "@faker-js/faker";
-import { fireEvent, RenderResult } from "@testing-library/react";
+import { fireEvent, RenderResult, waitFor } from "@testing-library/react";
 
 export const testChildCount = (
   sut: RenderResult,
@@ -46,4 +46,13 @@ export const testElementExistance = (
 ): void => {
   const el = sut.getByTestId(fieldName);
   expect(el).toBeTruthy();
+};
+
+export const testElementText = async (
+  sut: RenderResult,
+  fieldName: string,
+  text: string
+): Promise<void> => {
+  const el = await waitFor(() => sut.getByTestId(fieldName));
+  expect(el.textContent).toBe(text);
 };

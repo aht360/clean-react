@@ -10,6 +10,7 @@ import SignUp from "./Signup";
 import { AddAccountSpy, Helper, ValidationStub } from "@/presentation/test";
 import faker from "@faker-js/faker";
 import { EmailInUseError } from "@/domain/errors";
+import { testElementText } from "@/presentation/test/form-helper";
 
 type SutTypes = {
   sut: RenderResult;
@@ -51,15 +52,6 @@ const simulateValidSubmit = async (
   fireEvent.submit(form);
 
   await waitFor(() => form);
-};
-
-const testElementText = async (
-  sut: RenderResult,
-  fieldName: string,
-  text: string
-): Promise<void> => {
-  const el = await waitFor(() => sut.getByTestId(fieldName));
-  expect(el.textContent).toBe(text);
 };
 
 describe("Signup component", () => {
