@@ -9,6 +9,7 @@ import React from "react";
 import SignUp from "./Signup";
 import { AddAccountSpy, Helper, ValidationStub } from "@/presentation/test";
 import faker from "@faker-js/faker";
+import { EmailInUseError } from "@/domain/errors";
 
 type SutTypes = {
   sut: RenderResult;
@@ -50,6 +51,15 @@ const simulateValidSubmit = async (
   fireEvent.submit(form);
 
   await waitFor(() => form);
+};
+
+const testElementText = async (
+  sut: RenderResult,
+  fieldName: string,
+  text: string
+): Promise<void> => {
+  const el = await waitFor(() => sut.getByTestId(fieldName));
+  expect(el.textContent).toBe(text);
 };
 
 describe("Signup component", () => {
@@ -174,7 +184,7 @@ describe("Signup component", () => {
     });
   });
 
-  it("Should call authentication only once", async () => {
+  it("Should call AddAccount only once", async () => {
     const { sut, addAccountSpy } = makeSut();
 
     await simulateValidSubmit(sut);
@@ -190,5 +200,18 @@ describe("Signup component", () => {
     await simulateValidSubmit(sut);
 
     expect(addAccountSpy.callsCount).toBe(0);
+  });
+
+  it("Should present error if AddAccount fails", async () => {
+    const { sut, addAccountSpy } = makeSut();
+
+    const error = new EmailInUseError();
+
+    jest.spyOn(addAccountSpy, "add").mockRejectedValueOnce(error);
+
+    await simulateValidSubmit(sut);
+
+    testElementText(sut, "main-error", error.message);
+    Helper.testChildCount(sut, "error-wrap", 1);
   });
 });
