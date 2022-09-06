@@ -1,4 +1,4 @@
 export interface Validation {
-    errorMessage: string;
-    validate(fieldName: string, fieldValue: string): string;
+  errorMessage: string;
+  validate(fieldName: string, input: object): string;
 }
